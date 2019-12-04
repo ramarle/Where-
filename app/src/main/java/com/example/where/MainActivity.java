@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            Intent i = new Intent(this, PruebaUbicacionActivity.class);
+            Intent i = new Intent(this, UbicacionUserActivity.class);
             startActivity(i);
         }
     }
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void navigate(){
-        Intent i = new Intent(this, PruebaUbicacionActivity.class);
+        Intent i = new Intent(this, UbicacionUserActivity.class);
 
         startActivity(i);
     }

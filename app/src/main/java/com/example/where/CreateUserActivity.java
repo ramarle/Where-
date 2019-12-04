@@ -79,7 +79,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
                                 //AQUÍ HAY QUE NAVEGAR A LA VENTANA DE LA UBICACIÓN
 
-                                Intent i = new Intent(CreateUserActivity.this, PruebaUbicacionActivity.class);
+                                Intent i = new Intent(CreateUserActivity.this, UbicacionUserActivity.class);
                                 startActivity(i);
 
                             } else {

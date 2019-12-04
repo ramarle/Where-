@@ -35,5 +35,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:18.0.0'
     implementation 'com.google.firebase:firebase-auth:18.0.0'
     implementation 'com.takisoft.fix:preference-v7:25.3.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

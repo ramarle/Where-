@@ -30,4 +30,5 @@
     <string name="price">Precio:</string>
     <string name="tittle_frament">Selecciona tus preferencias:</string>
     <string name="search">Buscar:</string>
+    <string name="title_activity_ubicacion_user">Map</string>
 </resources>
