@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Where</string>
+    <string name="splashTitle">Copyright RML DEV 2019</string>
+    <string name="logo" translatable="false">logo</string>
+    <string name="user">Usuario:</string>
+    <string name="pass">Contraseña:</string>
+    <string name="login">Entrar</string>
+    <string name="forget_pass">¿Has Olvidado tu contraseña?</string>
+    <string name="add_user">Crear Usuario</string>
+    <string name="name">Nombre:</string>
+    <string name="surname">Apellido:</string>
+    <string name="email">Email:</string>
+    <string name="confirm_email">Confirma Email:</string>
+    <string name="confirmPass">Consfirmar Contraseña:</string>
+    <string name="create_user">Crear</string>
+    <string name="insert_email">Insertar email:</string>
+    <string name="send">Enviar</string>
+    <string name="create_user_fail">Ha fallado la creación del usuario</string>
+    <string name="get_location">Permiso para acceder a la ubicación</string>
+    <string name="get_location_explanation">Necesitamos acceder a la ubicación del dispositivo para prestarte nuestros servicios</string>
+    <string name="auth_fail">Usuario o contraseña incorrectos</string>
+    <string name="missing_fields">Faltan campos por cumplimentar</string>
+    <string name="ok">Aceptar</string>
+    <string name="title_forgot_pass_dialog">Restabler contraseña</string>
+    <string name="text_forgot_pass_dialog">Te hemos enviado un email para que puedas restablecer tu contraseña</string>
+    <string name="fail_forgot_pass">Fallo al enviar el mensaje, inténtalo más tarde</string>
+    <string name="toast_forgot_pass">Introduce un email</string>
+
+    <string name="food_type">Tipo de comida:</string>
+    <string name="price">Precio:</string>
+    <string name="tittle_frament">Selecciona tus preferencias:</string>
+    <string name="search">Buscar:</string>
+    <string name="title_activity_ubicacion_user">Map</string>
+</resources>

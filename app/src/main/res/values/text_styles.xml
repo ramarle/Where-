@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SplashFont">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/fredoka_one</item>
+    </style>
+
+    <style name="AppFont">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">@font/fredoka_one</item>
+    </style>
+
+    <style name="AppFont.H6">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AppFont.H5">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="AppFont.H4">
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="AppFont.H3">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="AppFont.H2">
+        <item name="android:textSize">60sp</item>
+    </style>
+
+    <style name="AppFont.H1">
+        <item name="android:textSize">96sp</item>
+    </style>
+
+    <style name="AppFont.Sub1">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="AppFont.Sub2">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="AppFont.Body1">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="AppFont.Body2">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="AppFont.Button">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppFont.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AppFont.Overline">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
+</resources>
