@@ -1,5 +1,6 @@
 package com.example.where;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -16,9 +17,13 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.where.data.User;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,6 +31,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,12 +41,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class UbicacionUserActivity extends FragmentActivity implements OnMapReadyCallback {
+public class UbicacionUserActivity extends FragmentActivity
+        implements GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener,
+        OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LocationManager locManager;
-    private Location loc;
 
+    private FusedLocationProviderClient fusedLocationClient;
     public static final int ACCESS_FINE_LOCATION = 1;
     public final String FAIl = "FAIL";
 
@@ -52,13 +61,29 @@ public class UbicacionUserActivity extends FragmentActivity implements OnMapRead
 
     private boolean flag;
 
+    FloatingActionButton fab;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubicacion_user);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        fab = findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_magnifglass);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(UbicacionUserActivity.this, SearchActivity.class);
+                startActivity(i);
+            }
+        });
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         mAuth = FirebaseAuth.getInstance();
@@ -70,16 +95,9 @@ public class UbicacionUserActivity extends FragmentActivity implements OnMapRead
 
         flag = true;
 
-        
-
         addDatabaseListener();
 
-        requestLocationPermission();
 
-        loc = new Location("myProvider");
-
-        loc.setLongitude(-3.70325);
-        loc.setLatitude(40.4167);
     }
 
     private void addDatabaseListener(){
@@ -129,24 +147,20 @@ public class UbicacionUserActivity extends FragmentActivity implements OnMapRead
                         }
                     });
                     builder.show();
+                    flag = true;
 
                 } else {
 
                     ActivityCompat.requestPermissions(this,
                             new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                             ACCESS_FINE_LOCATION);
-                    locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 }
             } else {
-
-
+                initMap();
 
             }
         } else {
-
-            locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            initMap();
         }
 
     }
@@ -161,6 +175,7 @@ public class UbicacionUserActivity extends FragmentActivity implements OnMapRead
                     if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         // permission was granted, yay! Do the
                         // contacts-related task you need to do.
+                        initMap();
                     } else {
                         requestLocationPermission();
                         flag = false;
@@ -178,32 +193,48 @@ public class UbicacionUserActivity extends FragmentActivity implements OnMapRead
 
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
 
+        requestLocationPermission();
 
-        // Add a marker in Sydney and move the camera
-        LatLng userLocation = new LatLng(loc.getLatitude(), loc.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(userLocation));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+    }
 
-        CameraPosition cameraPosition = CameraPosition.builder()
-                .target(userLocation)
-                .zoom(10)
-                .build();
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
+    }
 
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    @Override
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        // Return false so that we don't consume the event and the default behavior still occurs
+        // (the camera animates to the user's current position).
+        return false;
+    }
+
+    private void  initMap() {
+
+        mMap.setMyLocationEnabled(true);
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                updateMapLocation(location);
+            }
+        });
+    }
+
+    private void updateMapLocation(Location location) {
+
+        LatLng userPosition = new LatLng(location.getLatitude(), location.getLongitude());
+
+        mMap.addMarker(new MarkerOptions().position(userPosition));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition));
+
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15.0f));
     }
 }

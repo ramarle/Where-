@@ -28,5 +28,15 @@
     <string name="food_type">Food type:</string>
     <string name="price">Price:</string>
     <string name="tittle_frament">Select your preferences:</string>
-    <string name="search">Look for:</string>
+    <string name="search">Search</string>
+    <string name="distance">Distance:</string>
+    <string name="chinese_food">Chinese food</string>
+    <string name="italian_food">Italian food</string>
+    <string name="spanish_food">Spanish food</string>
+    <string name="more_than_30">More than 30€</string>
+    <string name="between_0_15">Between 0€ and 15€</string>
+    <string name="between_15_30">Between 15€ and 30€</string>
+    <string name="less_50">Less than 50 meters</string>
+    <string name="between_50_100">Between 50 meters and 100 meters</string>
+    <string name="between_100_300">Between 100 meters and 300 meters</string>
 </resources>
