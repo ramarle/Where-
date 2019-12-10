@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Where</string>
+    <string name="splashTitle">Copyright RML DEV 2019</string>
+    <string name="user">User:</string>
+    <string name="pass">Password:</string>
+    <string name="login">Login</string>
+    <string name="forget_pass">Have you forgotten your password?</string>
+    <string name="add_user">Create new user</string>
+    <string name="confirmPass">Confirm Password:</string>
+    <string name="confirm_email">Confirm Email:</string>
+    <string name="email">Email:</string>
+    <string name="name">Name:</string>
+    <string name="surname">Surname</string>
+    <string name="create_user">Add</string>
+    <string name="insert_email">Insert Email:</string>
+    <string name="send">Send</string>
+    <string name="create_user_fail">User creation failed</string>
+    <string name="get_location">Permission to access the location</string>
+    <string name="get_location_explanation">We need to access the location of the device to provide our services</string>
+    <string name="auth_fail">Incorrect username or password</string>
+    <string name="missing_fields">Complete all fields</string>
+    <string name="ok">Accept</string>
+    <string name="title_forgot_pass_dialog">Restore password</string>
+    <string name="text_forgot_pass_dialog">We have sent you an email so you can reset your password</string>
+    <string name="fail_forgot_pass">Failed to send message, please try again later.</string>
+    <string name="toast_forgot_pass">Insert an email</string>
+    <string name="food_type">Food type:</string>
+    <string name="price">Price:</string>
+    <string name="tittle_frament">Select your preferences:</string>
+    <string name="search">Search</string>
+    <string name="distance">Distance:</string>
+    <string name="chinese_food">Chinese food</string>
+    <string name="italian_food">Italian food</string>
+    <string name="spanish_food">Spanish food</string>
+    <string name="more_than_30">More than 30€</string>
+    <string name="between_0_15">Between 0€ and 15€</string>
+    <string name="between_15_30">Between 15€ and 30€</string>
+    <string name="less_50">Less than 50 meters</string>
+    <string name="between_50_100">Between 50 meters and 100 meters</string>
+    <string name="between_100_300">Between 100 meters and 300 meters</string>
+    <string name="loading">Loading</string>
+    <string name="creating">Creating user</string>
+    <string name="sending_email">Sending Email</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <resources>
+        <string-array name="food_array">
+            <item>@string/chinese_food</item>
+            <item>@string/italian_food</item>
+            <item>@string/spanish_food</item>
+        </string-array>
+
+    <string-array name="price_array">
+        <item>@string/between_0_15</item>
+        <item>@string/between_15_30</item>
+        <item>@string/more_than_30</item>
+    </string-array>
+
+    <string-array name="distance_array">
+        <item>@string/less_50</item>
+        <item>@string/between_50_100</item>
+        <item>@string/between_100_300</item>
+    </string-array>
+
+    </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="left_margin">32dp</dimen>
+    <dimen name="right_margin">32dp</dimen>
+    <dimen name="top_margin_small">32dp</dimen>
+    <dimen name="top_margin_medium">48dp</dimen>
+    <dimen name="top_margin_big">64dp</dimen>
+</resources>
