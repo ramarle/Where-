@@ -3,6 +3,7 @@ package com.example.where;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,8 @@ public class CreateUserActivity extends AppCompatActivity {
     //Layout views
     private EditText txtNameAdd, txtSurnameAdd, txtEmailAdd, txtConfirmEmailAdd, txtPassAdd, txtConfirmPassAdd;
     private Button btnCreateAdd;
+
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -66,6 +69,9 @@ public class CreateUserActivity extends AppCompatActivity {
 
         if (checkEmail() && checkPass() && (txtNameAdd.getText().toString().trim().length() > 0) && (txtSurnameAdd.getText().toString().trim().length() > 0)){
 
+            progressDialog.setTitle(R.string.creating);
+            progressDialog.show();
+
             mAuth.createUserWithEmailAndPassword(txtEmailAdd.getText().toString(), txtPassAdd.getText().toString())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -91,6 +97,8 @@ public class CreateUserActivity extends AppCompatActivity {
 
                         }
                     });
+
+            progressDialog.hide();
 
         } else {
 

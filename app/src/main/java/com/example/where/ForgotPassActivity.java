@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ForgotPassActivity extends AppCompatActivity {
 
     private final String SEND = "SEND";
+    private ProgressDialog progressDialog;
 
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
     private EditText txtForgotEmail;
     private Button btnForgotPass;
@@ -56,6 +58,9 @@ public class ForgotPassActivity extends AppCompatActivity {
 
     private void sendEmail(String emailAddress){
 
+        progressDialog.setTitle(R.string.sending_email);
+        progressDialog.show();
+
         auth.useAppLanguage();
 
         auth.sendPasswordResetEmail(emailAddress)
@@ -86,5 +91,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        progressDialog.hide();
     }
 }
