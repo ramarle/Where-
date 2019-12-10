@@ -3,6 +3,7 @@ package com.example.where;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -52,10 +53,8 @@ public class SearchActivity extends AppCompatActivity {
                 progressDialog.setTitle(R.string.loading);
                 progressDialog.show();
 
-
-
-
-
+                Intent i = new Intent(SearchActivity.this, RestaurantListActivity.class);
+                startActivity(i);
 
                 progressDialog.hide();
 

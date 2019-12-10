@@ -37,5 +37,10 @@ dependencies {
     implementation 'com.takisoft.fix:preference-v7:25.3.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.libraries.places:places:2.0.0'
+
+
+
+
 }
 apply plugin: 'com.google.gms.google-services'
