@@ -40,6 +40,7 @@ public class RestaurantListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_list);
+        getSupportActionBar().hide();
 
         recyclerView = findViewById(R.id.places_lst);
 
@@ -71,13 +72,13 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         Places.initialize(getApplicationContext(), "AIzaSyAXPSi2XqB9bfh5OCypkW3dxFGdujmyRkw");
 
-// Create a new Places client instance
+        // Create a new Places client instance
         PlacesClient placesClient = Places.createClient(this);
 
         // Use fields to define the data types to return.
-        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS,Place.Field.PHONE_NUMBER, Place.Field.LAT_LNG );
+        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG );
 
-    // Use the builder to create a FindCurrentPlaceRequest.
+        // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
 
         Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);

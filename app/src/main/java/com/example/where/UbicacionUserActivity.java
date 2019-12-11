@@ -8,27 +8,24 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.where.data.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -233,8 +230,11 @@ public class UbicacionUserActivity extends FragmentActivity
 
         mMap.addMarker(new MarkerOptions().position(userPosition));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(userPosition, 17);
+        mMap.animateCamera(cameraUpdate);
 
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(15.0f));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition));
+
+        //mMap.moveCamera(CameraUpdateFactory.zoomTo(15.0f));
     }
 }

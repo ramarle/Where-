@@ -1,5 +1,6 @@
 package com.example.where;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,40 +27,24 @@ public class PlacesRecyclerViewAdapter extends
         placesList = list;
         context = ctx;
     }
-    @Override
-    public int getItemCount() {
-        return placesList.size();
-    }
+
 
     @Override
-    public PlacesRecyclerViewAdapter.ViewHolder
-    onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.places_item, parent, false);
 
-        PlacesRecyclerViewAdapter.ViewHolder viewHolder =
-                new PlacesRecyclerViewAdapter.ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(PlacesRecyclerViewAdapter.ViewHolder holder, int position) {
-        final int itemPos = position;
         final Place place = placesList.get(position);
         holder.name.setText(place.getName());
         holder.address.setText(place.getAddress());
-        holder.phone.setText(place.getPhoneNumber());
-        if(place.getWebsiteUri() != null){
-            holder.website.setText(place.getWebsiteUri().toString());
-        }
-
-        if(place.getRating() > -1){
-            holder.ratingBar.setNumStars((int)place.getRating().doubleValue());
-        }else{
-            holder.ratingBar.setVisibility(View.GONE);
-        }
-
         holder.viewOnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,33 +54,32 @@ public class PlacesRecyclerViewAdapter extends
 
     }
 
+    @Override
+    public int getItemCount() {
+        return placesList.size();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name;
-        public TextView address;
-        public TextView phone;
-        public TextView website;
-        public RatingBar ratingBar;
-
-        public Button viewOnMap;
+        private TextView name;
+        private TextView address;
+        private Button viewOnMap;
 
         public ViewHolder(View view) {
 
             super(view);
 
-            name = view.findViewById(R.id.name);
-            address = view.findViewById(R.id.address);
-            phone = view.findViewById(R.id.phone);
-            website = view.findViewById(R.id.website);
-            ratingBar = view.findViewById(R.id.rating);
-
+            name = view.findViewById(R.id.name_rest);
+            address = view.findViewById(R.id.address_rest);
             viewOnMap = view.findViewById(R.id.view_map_b);
         }
     }
 
+
     private void showOnMap(Place place){
-        FragmentManager fm = ((RestaurantListActivity)context)
-                .getSupportFragmentManager();
+
+        Intent i = new Intent(context, RestLocationActivity.class);
+
 
         Bundle bundle=new Bundle();
         bundle.putString("name", (String)place.getName());
@@ -103,9 +87,9 @@ public class PlacesRecyclerViewAdapter extends
         bundle.putDouble("lat", place.getLatLng().latitude);
         bundle.putDouble("lng", place.getLatLng().longitude);
 
-        PlaceOnMapFragment placeFragment = new PlaceOnMapFragment();
-        placeFragment.setArguments(bundle);
+        i.putExtra("paquete", bundle);
 
-        fm.beginTransaction().replace(R.id.map_frame, placeFragment).commit();
+        context.startActivity(i);
+
     }
 }
