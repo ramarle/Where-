@@ -10,13 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class SearchActivity extends AppCompatActivity {
 
     private Spinner spinnerFood, spinnerPrice, spinnerDistance;
 
     private Button btnSearchRest;
 
-    private ProgressDialog progressDialog;
+    private LatLng userUbication;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +27,8 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         getSupportActionBar().hide();
-        progressDialog = new ProgressDialog(this);
 
+        userUbication = new LatLng(getIntent().getDoubleExtra("lat",0.0),getIntent().getDoubleExtra("long",0.0));
 
         spinnerFood = (Spinner) findViewById(R.id.spinner_food);
 
@@ -50,13 +53,12 @@ public class SearchActivity extends AppCompatActivity {
         btnSearchRest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setTitle(R.string.loading);
-                progressDialog.show();
 
-                Intent i = new Intent(SearchActivity.this, RestaurantListActivity.class);
+
+                Intent i = new Intent(SearchActivity.this, DisplayRestaurantsActivity.class);
+                i.putExtra("lat", userUbication.latitude);
+                i.putExtra("long", userUbication.longitude);
                 startActivity(i);
-
-                progressDialog.hide();
 
             }
         });

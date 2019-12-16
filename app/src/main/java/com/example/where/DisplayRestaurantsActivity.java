@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class DisplayRestaurantsActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private static final String API_KEY = "AIzaSyBO7_U7r1oST2upR26wkjwLQfYSMbAogQ4";
+    private static final String API_KEY = "AIzaSyAXPSi2XqB9bfh5OCypkW3dxFGdujmyRkw";
 
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
 
@@ -39,14 +39,12 @@ public class DisplayRestaurantsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_restaurants);
         Intent intent = getIntent();
-        String longitude = intent.getStringExtra("long");
-        String latitude = intent.getStringExtra("lat");
+        double lng = intent.getDoubleExtra("long",0.0);
+        double lat = intent.getDoubleExtra("lat", 0.0);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Double lng = Double.parseDouble(longitude);
-        Double lat = Double.parseDouble(latitude);
         int radius = 1000;
 
         ArrayList<Place> list = search(lat, lng, radius);

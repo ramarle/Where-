@@ -55,6 +55,7 @@ public class UbicacionUserActivity extends FragmentActivity
     private FirebaseAuth mAuth;
 
     private User user;
+    private LatLng userPosition;
 
     private boolean flag;
 
@@ -75,6 +76,9 @@ public class UbicacionUserActivity extends FragmentActivity
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(UbicacionUserActivity.this, SearchActivity.class);
+
+                i.putExtra("lat", userPosition.latitude);
+                i.putExtra("long", userPosition.longitude);
                 startActivity(i);
             }
         });
@@ -226,7 +230,7 @@ public class UbicacionUserActivity extends FragmentActivity
 
     private void updateMapLocation(Location location) {
 
-        LatLng userPosition = new LatLng(location.getLatitude(), location.getLongitude());
+        userPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
         mMap.addMarker(new MarkerOptions().position(userPosition));
 
