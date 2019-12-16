@@ -3,6 +3,7 @@ package com.example.where;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private ProgressDialog progressDialog;
+
     private EditText txtEmail, txtPass;
 
     private TextView txtForgotPass, txtCreateNewUser;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
+
+        progressDialog = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -95,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void singInUser(){
 
+        progressDialog.setTitle(R.string.loading);
+        progressDialog.show();
+
         mAuth.signInWithEmailAndPassword(txtEmail.getText().toString(), txtPass.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -114,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+        progressDialog.hide();
 
     }
 
